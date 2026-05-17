@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priya Roy - Creative Web Designer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'float': 'float 6s ease-in-out infinite',
+                        'typing': 'typing 3s steps(40, end)',
+                        'blink': 'blink 0.75s infinite',
+                    },
+                    keyframes: {
+                        glow: {
+                            '0%': { textShadow: '0 0 20px #8b5cf6, 0 0 30px #8b5cf6, 0 0 40px #8b5cf6' },
+                            '100%': { textShadow: '0 0 30px #06b6d4, 0 0 40px #06b6d4, 0 0 50px #06b6d4' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translate3d(0,0,0)' },
+                            '50%': { transform: 'translate3d(0,-20px,0)' }
+                        },
+                        typing: {
+                            'from': { width: '0' },
+                            'to': { width: '100%' }
+                        },
+                        blink: {
+                            '0%, 50%': { borderColor: 'transparent' },
+                            '51%, 100%': { borderColor: '#8b5cf6' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { font-family: 'Inter', sans-serif; }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glow-border {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(6, 182, 212, 0.2);
+        }
+        .neon-btn {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .neon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.6);
+        }
+        .floating-bg {
+            background: linear-gradient(45deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1), rgba(236, 72, 153, 0.1));
+            animation: float 20s ease-in-out infinite;
+        }
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        .scroll-animate.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="absolute w-72 h-72 bg-purple-500/10 rounded-full blur-3xl top-20 left-20 floating-bg"></div>
+        <div class="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl bottom-40 right-20 floating-bg" style="animation-delay: -10s;"></div>
+        <div class="absolute w-60 h-60 bg-pink-500/10 rounded-full blur-3xl top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 floating-bg" style="animation-delay: -5s;"></div>
+    </div>
+
+    <!-- Sticky Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass py-4 px-6 md:px-12 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text">Priya Roy</div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="hover:text-purple-400 transition-colors">Home</a>
+                <a href="#about" class="hover:text-purple-400 transition-colors">About</a>
+                <a href="#skills" class="hover:text-purple-400 transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-purple-400 transition-colors">Projects</a>
+                <a href="#contact" class="hover:text-purple-400 transition-colors">Contact</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-2xl">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden mt-4 space-y-4 pb-4">
+            <a href="#home" class="block py-2 hover:text-purple-400">Home</a>
+            <a href="#about" class="block py-2 hover:text-purple-400">About</a>
+            <a href="#skills" class="block py-2 hover:text-purple-400">Skills</a>
+            <a href="#projects" class="block py-2 hover:text-purple-400">Projects</a>
+            <a href="#contact" class="block py-2 hover:text-purple-400">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-6 md:px-12 relative overflow-hidden">
+        <div class="text-center max-w-4xl mx-auto scroll-animate">
+            <div class="inline-block">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 gradient-text animate-glow">Hi, I'm</h1>
+                <h2 class="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">Priya Roy</h2>
+            </div>
+            <div class="relative mb-12">
+                <div class="typing-container inline-block w-full">
+                    <span class="text-2xl md:text-3xl font-semibold gradient-text">Creative Web Designer</span>
+                    <span class="typing-cursor absolute right-0 top-1/2 -translate-y-1/2 w-1 h-10 bg-purple-500 animate-blink"></span>
+                </div>
+            </div>
+            <p class="text-xl md:text-2xl mb-12 text-gray-300 max-w-2xl mx-auto leading-relaxed">UI/UX Designer & Frontend Developer crafting premium digital experiences with modern design & cutting-edge technology.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#projects" class="neon-btn group text-lg font-semibold px-10 py-4 rounded-full inline-flex items-center glow-border">
+                    View My Work
+                    <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="#contact" class="glass px-10 py-4 rounded-full text-lg font-semibold border border-white/20 hover:border-white/40 transition-all glow-border">Contact Me</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-32 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">About Me</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Turning ideas into beautiful, functional digital experiences.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-12 items-center scroll-animate">
+                <div>
+                    <div class="glass p-8 md:p-12 rounded-3xl glow-border mb-8">
+                        <h4 class="text-3xl font-bold mb-6 gradient-text">Creative Web Designer</h4>
+                        <p class="text-lg text-gray-300 leading-relaxed mb-8">With 5+ years of experience in UI/UX design and frontend development, I specialize in creating premium, responsive websites that blend stunning visuals with flawless functionality. Passionate about glassmorphism, gradients, and futuristic design trends.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="glass p-4 rounded-xl text-center neon-btn text-sm font-semibold">5+ Years</div>
+                            <div class="glass p-4 rounded-xl text-center neon-btn text-sm font-semibold">50+ Projects</div>
+                            <div class="glass p-4 rounded-xl text-center neon-btn text-sm font-semibold">100% Responsive</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="glass p-8 md:p-12 rounded-3xl glow-border">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Priya Roy" class="w-full h-80 object-cover rounded-2xl shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 px-6 md:px-12 bg-black/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Skills & Expertise</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Mastering modern web technologies to deliver exceptional results</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate">
+                    <div class="w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl font-bold">HTML</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">HTML5</h4>
+                    <p class="text-gray-300">Semantic markup & modern structure</p>
+                </div>
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate" style="animation-delay: 0.1s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-400 to-indigo-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl font-bold">CSS</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">CSS3</h4>
+                    <p class="text-gray-300">Animations, Flexbox, Grid, Tailwind</p>
+                </div>
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-yellow-400 to-amber-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-2xl font-bold">JS</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">JavaScript</h4>
+                    <p class="text-gray-300">ES6+, DOM, Async, Performance</p>
+                </div>
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate" style="animation-delay: 0.3s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-teal-400 to-cyan-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-xl font-bold">TW</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">Tailwind CSS</h4>
+                    <p class="text-gray-300">Utility-first rapid development</p>
+                </div>
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate" style="animation-delay: 0.4s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-pink-400 to-rose-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-xl">🎨</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">Figma</h4>
+                    <p class="text-gray-300">UI/UX Design & Prototyping</p>
+                </div>
+                <div class="glass p-8 rounded-3xl text-center glow-border hover:scale-105 transition-all duration-300 scroll-animate" style="animation-delay: 0.5s;">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-500 rounded-2xl mx-auto mb-6 flex items-center justify-center text-xl font-bold">📱</div>
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">Responsive</h4>
+                    <p class="text-gray-300">Mobile-first design approach</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Featured Projects</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Premium websites showcasing modern design & development</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="group scroll-animate">
+                    <div class="glass rounded-3xl overflow-hidden glow-border hover:scale-105 transition-all duration-500">
+                        <div class="h-64 bg-gradient-to-br from-purple-900/50 to-cyan-900/50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <img src="https://images.unsplash.com/photo-1469362102473-8622cfb973cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fashion Website" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <h4 class="text-2xl font-bold mb-2 gradient-text">Fashion Website</h4>
+                                <p class="text-gray-300 mb-4">Premium fashion e-commerce platform with glassmorphism design</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">Figma</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Tailwind</span>
+                                <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-sm">Responsive</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="#" class="neon-btn flex-1 text-center py-3 px-6 rounded-xl font-semibold">Live Demo</a>
+                                <a href="#" class="glass px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 transition-all">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group scroll-animate" style="animation-delay: 0.1s;">
+                    <div class="glass rounded-3xl overflow-hidden glow-border hover:scale-105 transition-all duration-500">
+                        <div class="h-64 bg-gradient-to-br from-cyan-900/50 to-purple-900/50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <img src="https://images.unsplash.com/photo-1559027386-f51361e90fc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Portfolio" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <h4 class="text-2xl font-bold mb-2 gradient-text">Portfolio Website</h4>
+                                <p class="text-gray-300 mb-4">Personal portfolio with futuristic glassmorphism effects</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">HTML</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">CSS</span>
+                                <span class="px-3 py-1 bg-green-500/20 text-green-300 rounded-full text-sm">JS</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="#" class="neon-btn flex-1 text-center py-3 px-6 rounded-xl font-semibold">Live Demo</a>
+                                <a href="#" class="glass px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 transition-all">View Code</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="group scroll-animate" style="animation-delay: 0.2s;">
+                    <div class="glass rounded-3xl overflow-hidden glow-border hover:scale-105 transition-all duration-500 md:col-span-2">
+                        <div class="h-64 bg-gradient-to-br from-pink-900/50 to-purple-900/50 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Agency Website" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute bottom-6 left-6 right-6">
+                                <h4 class="text-2xl font-bold mb-2 gradient-text">Agency Website</h4>
+                                <p class="text-gray-300 mb-4">Creative agency landing page with animated gradients & parallax</p>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-sm">UI/UX</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-sm">Animations</span>
+                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-300 rounded-full text-sm">Performance</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <a href="#" class="neon-btn flex-1 text-center py-3 px-6 rounded-xl font-semibold">Live Demo</a>
+                                <a href="#" class="glass px-6 py-3 rounded-xl border border-white/20 hover:border-white/40 transition-all">View Case Study</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-32 px-6 md:px-12 bg-black/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Services</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">Premium design & development services for your next project</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-10 rounded-3xl text-center glow-border hover:scale-105 transition-all scroll-animate">
+                    <div class="w-20 h-20 neon-btn rounded-3xl mx-auto mb-8 flex items-center justify-center text-2xl">🎨</div>
+                    <h4 class="text-3xl font-bold mb-6 gradient-text">UI/UX Design</h4>
+                    <p class="text-gray-300 mb-8 leading-relaxed">Beautiful, intuitive interfaces designed in Figma with pixel-perfect execution</p>
+                    <div class="text-2xl font-bold gradient-text">From $2,500</div>
+                </div>
+                <div class="glass p-10 rounded-3xl text-center glow-border hover:scale-105 transition-all scroll-animate" style="animation-delay: 0.1s;">
+                    <div class="w-20 h-20 neon-btn rounded-3xl mx-auto mb-8 flex items-center justify-center text-2xl">💻</div>
+                    <h4 class="text-3xl font-bold mb-6 gradient-text">Frontend Development</h4>
+                    <p class="text-gray-300 mb-8 leading-relaxed">Responsive, fast websites built with modern HTML, CSS & JavaScript</p>
+                    <div class="text-2xl font-bold gradient-text">From $3,000</div>
+                </div>
+                <div class="glass p-10 rounded-3xl text-center glow-border hover:scale-105 transition-all scroll-animate" style="animation-delay: 0.2s;">
+                    <div class="w-20 h-20 neon-btn rounded-3xl mx-auto mb-8 flex items-center justify-center text-2xl">⚡</div>
+                    <h4 class="text-3xl font-bold mb-6 gradient-text">Website Optimization</h4>
+                    <p class="text-gray-300 mb-8 leading-relaxed">Performance optimization, SEO & Lighthouse score improvements</p>
+                    <div class="text-2xl font-bold gradient-text">From $1,200</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Timeline -->
+    <section class="py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">My Journey</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">5+ years of continuous growth in design & development</p>
+            </div>
+            <div class="relative">
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-purple-500 to-cyan-500 bg-opacity-30 rounded-full hidden lg:block"></div>
+                <div class="space-y-16">
+                    <div class="flex flex-col lg:flex-row items-center lg:space-x-12 space-y-12 lg:space-y-0 scroll-animate">
+                        <div class="lg:w-1/2 order-2 lg:order-1">
+                            <div class="glass p-8 rounded-3xl glow-border">
+                                <h4 class="text-2xl font-bold mb-4 gradient-text">Frontend Developer</h4>
+                                <p class="text-gray-300 mb-4">Creative Agency • 2022 - Present</p>
+                                <p class="text-gray-400">Leading frontend development for premium client projects</p>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 text-right order-1 lg:order-2">
+                            <div class="glass w-24 h-24 neon-btn rounded-full mx-auto lg:ml-auto flex items-center justify-center text-2xl font-bold">2022</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row-reverse items-center lg:space-x-12 space-y-12 lg:space-y-0 scroll-animate">
+                        <div class="lg:w-1/2 order-2 lg:order-1">
+                            <div class="glass p-8 rounded-3xl glow-border">
+                                <h4 class="text-2xl font-bold mb-4 gradient-text">UI/UX Designer</h4>
+                                <p class="text-gray-300 mb-4">Freelance • 2020 - 2022</p>
+                                <p class="text-gray-400">Designed 30+ premium websites for international clients</p>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 text-left order-1 lg:order-2">
+                            <div class="glass w-24 h-24 neon-btn rounded-full mx-auto lg:mr-auto flex items-center justify-center text-2xl font-bold">2020</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col lg:flex-row items-center lg:space-x-12 space-y-12 lg:space-y-0 scroll-animate">
+                        <div class="lg:w-1/2 order-2 lg:order-1">
+                            <div class="glass p-8 rounded-3xl glow-border">
+                                <h4 class="text-2xl font-bold mb-4 gradient-text">Junior Designer</h4>
+                                <p class="text-gray-300 mb-4">Design Studio • 2019 - 2020</p>
+                                <p class="text-gray-400">Learned modern design principles & Figma workflows</p>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 text-right order-1 lg:order-2">
+                            <div class="glass w-24 h-24 neon-btn rounded-full mx-auto lg:ml-auto flex items-center justify-center text-2xl font-bold">2019</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-6 md:px-12 bg-black/50">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-24 scroll-animate">
+                <h3 class="text-4xl md:text-5xl font-bold gradient-text mb-6">Get In Touch</h3>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-12">Ready to transform your ideas into reality? Let's create something amazing together.</p>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="scroll-animate">
+                    <div class="glass p-10 rounded-3xl glow-border space-y-6">
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 gradient-text">Email</h4>
+                            <p class="text-gray-300">hello@priyaroy.com</p>
+                        </div>
+                        <div>
+                            <h4 class="text-2xl font-bold mb-4 gradient-text">Social</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-12 h-12 glass rounded-xl flex items-center justify-center hover:neon-btn transition-all glow-border">
+                                    <svg fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                                </a>
+                                <a href="#" class="w-12 h-12 glass rounded-xl flex items-center justify-center hover:neon-btn transition-all glow-border">
+                                    <svg fill="currentColor" class="w-6 h-6" viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scroll-animate">
+                    <form class="glass p-10 rounded-3xl glow-border space-y-6">
+                        <div>
+                            <input type="text" placeholder="Your Name" class="w-full glass p-5 rounded-2xl border border-white/20 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 bg-black text-white">
+                        </div>
+                        <div>
+                            <input type="email" placeholder="Your Email" class="w-full glass p-5 rounded-2xl border border-white/20 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 bg-black text-white">
+                        </div>
+                        <div>
+                            <textarea rows="5" placeholder="Your Message" class="w-full glass p-5 rounded-2xl border border-white/20 focus:border-purple-500 focus:outline-none focus:ring-4 focus:ring-purple-500/20 bg-black text-white resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="neon-btn w-full py-5 px-8 rounded-2xl text-xl font-bold glow-border uppercase tracking-wide">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 md:px-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="gradient-text text-3xl font-bold mb-6">Priya Roy</div>
+            <p class="text-gray-400 mb-8">Creative Web Designer & UI/UX Specialist</p>
+            <div class="flex flex-col md:flex-row gap-8 md:gap-12 justify-center items-center text-gray-400 text-sm">
+                <span>&copy; 2024 Priya Roy. All rights reserved.</span>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-purple-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-purple-400 transition-colors">Terms</a>
+                    <a href="#" class="hover:text-purple-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Typing Animation
+        const typingTexts = ['Creative Web Designer', 'UI/UX Designer', 'Frontend Developer'];
+        let textIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.querySelector('.typing-container span');
+        const cursor = document.querySelector('.typing-cursor');
+
+        function typeWriter() {
+            if (charIndex < typingTexts[textIndex].length) {
+                typingElement.textContent = typingTexts[textIndex].slice(0, charIndex + 1);
+                charIndex++;
+                setTimeout(typeWriter, 100);
+            } else {
+                setTimeout(() => {
+                    charIndex = 0;
+                    textIndex = (textIndex + 1) % typingTexts.length;
+                    typeWriter();
+                }, 3000);
+            }
+        }
+
+        // Start typing animation after page load
+        window.addEventListener('load', () => {
+            typeWriter();
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
